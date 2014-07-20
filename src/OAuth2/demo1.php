@@ -1,29 +1,30 @@
 <?php
-require('client.php');
-require('GrantType/IGrantType.php');
-require('GrantType/AuthorizationCode.php');
+require('path/to/client.php');
+require('path/to/GrantType/IGrantType.php');
+require('path/to/GrantType/AuthorizationCode.php');
 
-const CLIENT_ID     = '123456';
-const CLIENT_SECRET = 'your client secret';
+$clientId = 'yourClientId';
+$clientSecret = 'yourClientSecret';
+$client = new OAuth2\Client($clientId, $clientSecret);
 
-const REDIRECT_URI           = 'http://alchemy1.nationbuilder./this.php';
-const AUTHORIZATION_ENDPOINT = 'https://alchemy1.nationbuilder.com/oauth/authorize';
-const TOKEN_ENDPOINT         = 'https://alchemy1.nationbuilder.com//oauth/access_token';
+$redirectUrl    = 'http://www.myapp.com/oauth_callback';
+$authorizeUrl   = 'https://alchemy1.nationbuilder.com/oauth/authorize';
+$authUrl = $client->getAuthenticationUrl($authorizeUrl, $redirectUrl);
+echo $authUrl;
 
-$client = new OAuth2\Client(CLIENT_ID, CLIENT_SECRET);
-if (!isset($_GET['code']))
-{
-    $auth_url = $client->getAuthenticationUrl(AUTHORIZATION_ENDPOINT, REDIRECT_URI);
-    header('Location: ' . $auth_url);
-    die('Redirect');
-}
-else
-{
-    $params = array('code' => $_GET['code'], 'redirect_uri' => REDIRECT_URI);
-    $response = $client->getAccessToken(TOKEN_ENDPOINT, 'authorization_code', $params);
-    parse_str($response['result'], $info);
-    $client->setAccessToken($info['access_token']);
-    $response = $client->fetch('https://alchemy1.nationbuilder.com/me');
-    var_dump($response, $response['result']);
-}
+$code = '123456abcdeff';
+// generate a token response
+$accessTokenUrl = 'https://alchemy1.nationbuilder.com/oauth/token';
+$params = array('code' => $code, 'redirect_uri' => $redirectUrl);
+$response = $client->getAccessToken($accessTokenUrl, 'authorization_code', $params);
+
+// set the client token
+$token = $response['result']['access_token'];
+$client->setAccessToken($token);
+
+$baseApiUrl = 'https://alchemy1.nationbuilder.com';
+$client->setAccessToken($token);
+$response = $client->fetch($baseApiUrl . '/api/v1/people');
+print_r($response);
 ?>
+
