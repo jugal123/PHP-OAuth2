@@ -3,7 +3,7 @@ require('client.php');
 require('GrantType/IGrantType.php');
 require('GrantType/AuthorizationCode.php');
 
-const CLIENT_ID     = 'your client id';
+const CLIENT_ID     = '123456';
 const CLIENT_SECRET = 'your client secret';
 
 const REDIRECT_URI           = 'http://alchemy1.nationbuilder./this.php';
