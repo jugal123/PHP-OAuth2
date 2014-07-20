@@ -12,7 +12,7 @@ $authorizeUrl   = 'https://alchemy1.nationbuilder.com/oauth/authorize';
 $authUrl = $client->getAuthenticationUrl($authorizeUrl, $redirectUrl);
 echo $authUrl;
 
-$code = '123456abcdeff';
+$code = '123456abcdef';
 // generate a token response
 $accessTokenUrl = 'https://alchemy1.nationbuilder.com/oauth/token';
 $params = array('code' => $code, 'redirect_uri' => $redirectUrl);
