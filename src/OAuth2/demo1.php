@@ -6,7 +6,7 @@ require('GrantType/AuthorizationCode.php');
 const CLIENT_ID     = 'your client id';
 const CLIENT_SECRET = 'your client secret';
 
-const REDIRECT_URI           = 'http://url/of/this.php';
+const REDIRECT_URI           = 'http://alchemy1.nationbuilder./this.php';
 const AUTHORIZATION_ENDPOINT = 'https://alchemy1.nationbuilder.com/oauth/authorize';
 const TOKEN_ENDPOINT         = 'https://alchemy1.nationbuilder.com//oauth/access_token';
 
